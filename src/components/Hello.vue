@@ -1,5 +1,6 @@
 <template>
-  <div class="hello">
+  <!-- <div class="hello">
+    <img src="../assets/logo.png">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -17,22 +18,65 @@
       <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
+  </div> -->
+  <div class="hello">
+    <div class="section">
+      <book-list :books="latestUpdated" heading="Latest Updated" @onBookSelect="preview"></book-list>
+    </div>
+    <div class="section">
+      <book-list :books="recommended" heading="Recommended"></book-list>
+    </div>
   </div>
 </template>
 
 <script>
+import BookList from '@/components/BookList'
+import faker from '../util/faker'
+
 export default {
   name: 'hello',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      latestUpdated: [],
+      recommended: []
+      // msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  created () {
+    var booklist = faker.getBookListData()
+
+    this.latestUpdated = booklist.latestUpdated
+    this.recommended = booklist.recommended
+    // var self = this
+    // this.$http.get('apiurl').then(function (result) {
+    //   self.latestUpdated = result.latestUpdated
+    //   self.recommended = result.recommended
+    // })
+  },
+  components: {
+    'book-list': BookList
+  },
+  methods: {
+    preview: function (book, arg, event) {
+      console.log(arg)
+      if (!event) {
+        alert(book.title)
+      }
     }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="less">
+.hello {
+  /*text-align: center;*/
+
+  .section {
+    margin-bottom: 1rem;
+  }
+}
+
 h1, h2 {
   font-weight: normal;
 }

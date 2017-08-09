@@ -1,0 +1,29 @@
+{
+  	"latestUpdated": [{
+        "id": 1,
+        "title": "book name 1",
+        "authors": ["author A", "author B"],
+        "img_url": "logo.png"
+    }, {
+        "id": 2,
+        "title": "book name 2",
+        "authors": ["author C", "author D"],
+        "img_url": "logo.png"
+    }, {
+        "id": 3,
+        "title": "book name 3",
+        "authors": ["author E", "author F"],
+        "img_url": "logo.png"
+    }],
+    "recommended": [{
+        "id": 2,
+        "title": "book name 2",
+        "authors": ["author C", "author D"],
+        "img_url": "logo.png"
+    }, {
+        "id": 4,
+        "title": "book name 4",
+        "authors": ["author G", "author H"],
+        "img_url": "logo.png"
+    }]
+}
