@@ -24,13 +24,23 @@
       <book-list :books="latestUpdated" heading="Latest Updated" @onBookSelect="preview"></book-list>
     </div>
     <div class="section">
-      <book-list :books="recommended" heading="Recommended"></book-list>
+      <book-list :books="recommended" heading="Recommended" @onBookSelect="preview"></book-list>
     </div>
+    <modal-dialog ref="dialog">
+      <div slot="header"><span>test heading</span></div>
+      <span>
+        <div v-if="selected">
+          <h2>{{ selected.title }}</h2>
+        </div>
+      </span>
+      <span>test</span>
+    </modal-dialog>
   </div>
 </template>
 
 <script>
 import BookList from '@/components/BookList'
+import ModalDialog from '@/components/Dialog'
 import faker from '../util/faker'
 
 export default {
@@ -38,7 +48,8 @@ export default {
   data () {
     return {
       latestUpdated: [],
-      recommended: []
+      recommended: [],
+      selected: undefined
       // msg: 'Welcome to Your Vue.js App'
     }
   },
@@ -54,14 +65,17 @@ export default {
     // })
   },
   components: {
-    'book-list': BookList
+    'book-list': BookList,
+    'modal-dialog': ModalDialog
   },
   methods: {
     preview: function (book, arg, event) {
       console.log(arg)
-      if (!event) {
-        alert(book.title)
-      }
+      // if (!event) {
+      //   alert(book.title)
+      // }
+      this.selected = book
+      this.$refs.dialog.open()
     }
   }
 }
