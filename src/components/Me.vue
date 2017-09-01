@@ -16,7 +16,7 @@
 
 <script>
 import faker from '../util/faker'
-import Transform from '../util/transform2'
+import Transform from '../util/transform'
 
 export default {
   name: 'me',
@@ -52,7 +52,10 @@ export default {
       console.log(JSON.stringify(result))
     },
     transformData: function (event) {
-      console.log(JSON.stringify(Transform.transformData(faker.getBpMappingRule(), faker.getBpSimplifiedData())))
+      var transformed = Transform.transform2TargetJSON(faker.getBpMappingRule(), faker.getBpSimplifiedData())
+
+      this.transformResult = transformed
+      console.log(JSON.stringify(transformed))
     }
   }
 }
